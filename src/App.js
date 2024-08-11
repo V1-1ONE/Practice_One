@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import ColorChanger from './ColorChanger';
+
 
 function App() {
   const [inputText, setInputText] = useState('');
@@ -34,6 +36,11 @@ function App() {
         ))}
       </ul>
       <hr></hr>
+      <div>
+      <h1>Красим текст</h1>
+      <ColorChanger /> 
+    </div>
+
     </div>
   );
 }
