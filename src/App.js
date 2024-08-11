@@ -1,23 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
 
 function App() {
+  const [inputText, setInputText] = useState('');
+  const [submittedTexts, setSubmittedTexts] = useState([]);
+
+  const handleInputChange = (event) => {
+    setInputText(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (inputText.trim() !== '') {
+      setSubmittedTexts([inputText, ...submittedTexts]);
+      setInputText('');
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <p>Введённый тест: {inputText}</p>
+        <input
+          type="text"
+          value={inputText}
+          onChange={handleInputChange}
+          placeholder="Напечатайте что-нибудь..."
+        />
+        <button type="submit">Отправить</button>
+      </form>
+      <ul>
+        {submittedTexts.map((text, index) => (
+          <li key={index}>{text}</li>
+        ))}
+      </ul>
+      <hr></hr>
     </div>
   );
 }
